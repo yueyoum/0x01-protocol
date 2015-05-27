@@ -1,6 +1,6 @@
 
 message Unit {
-    required int32 id = 1;
+    required string id = 1;
     repeated float pos = 2;
     repeated float move_vector = 3;  // towards * speed
 
@@ -18,6 +18,6 @@ message UnitUpdate {
 }
 
 message UnitRemove {
-    repeated int32 ids = 1;
+    repeated string ids = 1;
 }
 
