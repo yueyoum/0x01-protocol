@@ -1,24 +1,23 @@
 
-message Player {
+message Unit {
     required int32 id = 1;
     repeated float pos = 2;
-    repeated float towards = 3;
+    repeated float move_vector = 3;  // towards * speed
 
     optional string name = 4;
     optional float size = 5;
     optional int32 color = 6;
-    optional float speed = 7;
 }
 
-
-// client <=> server
-message PlayerUpdate {
-    repeated Player players = 1;
+message UnitAdd {
+    required Unit units = 1;
 }
 
+message UnitUpdate {
+    repeated Unit units = 1;
+}
 
-// client => server
-message PlayerDie {
+message UnitRemove {
     repeated int32 ids = 1;
 }
 
