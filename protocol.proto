@@ -10,7 +10,7 @@ message Unit {
 }
 
 message UnitAdd {
-    required Unit units = 1;
+    repeated Unit units = 1;
 }
 
 message UnitUpdate {
