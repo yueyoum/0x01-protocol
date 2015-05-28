@@ -1,6 +1,7 @@
 
 message TimeSync {
-    required int64 milliseconds = 1;    // UTC timestamp in milliseconds
+    required int64 client = 1;  // UTC timestamp in milliseconds
+    required int64 server = 2;
 }
 
 
