@@ -1,4 +1,9 @@
 
+message TimeSync {
+    required int64 milliseconds = 1;    // UTC timestamp in milliseconds
+}
+
+
 message Unit {
     required string id = 1;
     repeated float pos = 2;
@@ -14,10 +19,12 @@ message UnitAdd {
 }
 
 message UnitUpdate {
-    repeated Unit units = 1;
+    required int64 milliseconds = 1;    // server based
+    repeated Unit units = 2;
 }
 
 message UnitRemove {
     repeated string ids = 1;
 }
+
 
