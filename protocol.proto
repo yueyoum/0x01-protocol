@@ -5,27 +5,35 @@ message TimeSync {
 }
 
 
+message Vector2 {
+    required float x = 1;
+    required float y = 2;
+}
+
+
 message Unit {
     required string id = 1;
-    repeated float pos = 2;
-    repeated float move_vector = 3;  // towards * speed
+    required Vector2 pos = 2;
+    required Vector2 towards = 3;  // mutilpled with speed
 
     optional string name = 4;
     optional float size = 5;
     optional int32 color = 6;
 }
 
+
 message UnitAdd {
     repeated Unit units = 1;
 }
+
 
 message UnitUpdate {
     required int64 milliseconds = 1;    // server based
     repeated Unit units = 2;
 }
 
+
 message UnitRemove {
     repeated string ids = 1;
 }
-
 
