@@ -37,3 +37,18 @@ message UnitRemove {
     repeated string ids = 1;
 }
 
+
+message DotNew {
+    message Dot {
+        required int32 id = 1;
+        required Vector2 pos = 2;
+    }
+
+    repeated Dot dots = 1;
+}
+
+message DotRemove {
+    repeated int32 ids = 1;
+}
+
+
