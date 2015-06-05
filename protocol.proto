@@ -1,4 +1,6 @@
 
+// server <=> client
+// The First Message client send to server
 message TimeSync {
     required int64 client = 1;  // UTC timestamp in milliseconds
     required int64 server = 2;
@@ -10,7 +12,8 @@ message Vector2 {
     required float y = 2;
 }
 
-
+// A circle on the screen.
+// One Player can have many Units (split)
 message Unit {
     enum UnitStatus {
         Idle = 1;
@@ -29,33 +32,62 @@ message Unit {
 }
 
 
+// client <=> server
+// **NOTE** UnitAdd are broadcast to all clients immediately
+// No need waiting for server tick
 message UnitAdd {
     repeated Unit units = 1;
 }
 
+// client => server
+message UnitRemove {
+    repeated string ids = 1;
+}
 
+
+// client => server
 message UnitUpdate {
     required int64 milliseconds = 1;    // server based
     repeated Unit units = 2;
 }
 
 
-message UnitRemove {
+message Dot {
+    required string id = 1;
+    required Vector2 pos = 2;
+}
+
+
+// client => server
+message DotRemove {
     repeated string ids = 1;
 }
 
-
-message DotNew {
-    message Dot {
-        required int32 id = 1;
-        required Vector2 pos = 2;
-    }
-
-    repeated Dot dots = 1;
+// server => client
+// when a new client join in
+message SceneInit {
+    required UnitAdd unit_adds = 1;
+    repeated Dot dot_adds = 2;
 }
 
-message DotRemove {
-    repeated int32 ids = 1;
+// server => client
+// server tick
+message SceneSync {
+    required UnitUpdate unit_updates = 1;
+    optional UnitRemove unit_removes = 2;
+    repeated Dot dot_adds = 3;
+    optional DotRemove dot_removes = 4;
 }
+
+
+// Communication
+// 1. client join server
+// 2. client send TimeSync to sync time
+// 3. server send SceneInit
+// 4. client send UnitAdd. and self in server
+// 5. server broadcast this message immediately
+// 6. client send UnitUpdate/UnitRemove/DotRemove to server
+// 7. server sync this change in next server tick
+
 
 
