@@ -6,13 +6,6 @@ message TimeSync {
     required int64 server = 2;
 }
 
-// client => server
-// The Second Message client send to server
-// send after got server TimeSync back
-message Ready {
-
-}
-
 
 message Vector2 {
     required float x = 1;
@@ -62,6 +55,7 @@ message UnitUpdate {
 message Dot {
     required string id = 1;
     required Vector2 pos = 2;
+    required int32 color = 3;
 }
 
 // server => client
@@ -75,6 +69,12 @@ message DotRemove {
     repeated string ids = 1;
 }
 
+// server => client
+// when a new connection made
+message SceneInit {
+    required UnitAdd unit_adds = 1;
+    required DotAdd dot_adds = 2;
+}
 
 // server => client
 // server tick
@@ -89,13 +89,9 @@ message SceneSync {
 // Communication
 // 1. client join server.
 // 2. client send TimeSync to sync time, and server send TimeSync back.
-// 3. client send Ready to server. After got TimeSync.
-// 4. server join this client to room. and will send SceneSync at next tick time.
-// 5. client got SceneSync. and wating User Input name.
-// 6. client got name, and send UnitAdd to server.
-// 7. server broadcast this message immediately.
-// 8. client send UnitUpdate/UnitRemove/DotRemove to server
-// 9. server sync this change in next server tick
-
-
+// 3. server make this client join room, and send SceneInit to client.
+// 4. client got name, and send UnitAdd to server.
+// 5. server broadcast this message immediately.
+// 7. client send UnitUpdate/UnitRemove/DotRemove to server
+// 8. server send SceneSync in next server tick
 
