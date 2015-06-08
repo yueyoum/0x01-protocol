@@ -23,11 +23,11 @@ message Unit {
 
     required string id = 1;
     required Vector2 pos = 2;
-    required Vector2 towards = 3;  // mutilpled with speed
+    required Vector2 towards = 3;
     required UnitStatus status = 4;
+    required float score = 5;
 
-    optional string name = 5;
-    optional float size = 6;
+    optional string name = 6;
     optional int32 color = 7;
 }
 
