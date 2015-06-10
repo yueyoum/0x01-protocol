@@ -29,6 +29,8 @@ message Unit {
 
     optional string name = 6;
     optional int32 color = 7;
+
+    required int64 update_at = 8;   // server based
 }
 
 
@@ -47,7 +49,6 @@ message UnitRemove {
 
 // client => server
 message UnitUpdate {
-    required int64 milliseconds = 1;    // server based
     repeated Unit units = 2;
 }
 
